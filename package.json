@@ -1,0 +1,12 @@
+{
+  "name": "practica_node_2025",
+  "version": "1.0.0",
+  "description": "practicas con node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["ifts11", "server", "node"],
+  "author": "",
+  "license": "ISC"
+}
