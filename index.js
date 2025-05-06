@@ -1,13 +1,36 @@
 const {createServer} = require('node:http');
+const fs = require('node:fs');
 
-const PORT = 3000
-const HOSTNAME = '127.0.0.1'
+const HOME = fs.readFileSync('./index.html');
+const ABOUT = fs.readFileSync('./about.html');
+
+const PORT = 3000;
+const HOSTNAME = '127.0.0.1';
 
 const server = createServer((req, res) => {
-    //res.setHeader('Content-Type', 'text/plain')
-    res.setHeader('Content-Type', 'text/html')
-    res.write('<H1> HOLA MUNDO DESDE MI SERVIDOR NODE </H1>')
-    res.end()
+
+    const {url} = req;
+
+    if(url === '/'){
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/html');
+        res.write(HOME);
+    }
+
+    else if(url === '/about'){
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/html');
+        res.write(ABOUT);
+    }else{
+        res.statusCode = 404;
+        res.setHeader('Content-Type', 'text/plain');
+        res.write('<H1> PAGINA NO ENCONTRADA 404 NOT FOUND </H1>');
+
+        //res.statusCode = 404;
+        //res.setHeader('Content-Type', 'text/html')     
+    }
+    
+    res.end();
 });
 
 server.listen(PORT, HOSTNAME, () => {
